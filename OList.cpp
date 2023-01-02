@@ -183,7 +183,11 @@ OList::OList(const char * const pFileName, int numNodes)
 	this->privFunctor = nullptr;
 
  	FILE *pFileHandle;
-	fopen_s(&pFileHandle, pFileName, "rb");
+	if (fopen_s(&pFileHandle, pFileName, "rb") != 0)
+	{
+		printf("ERROR: Cannot Open File!);
+		return;
+	}
 
 	// Grab a contiguous block of memory
 	char* p = new char[(unsigned int)numNodes * sizeof(Node)];
